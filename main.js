@@ -51,8 +51,56 @@ function compraOnline(){
 }
 
 
-
 compraOnline()
+
+
+function Cliente(nombre, apellido, edad){
+    this.nombre =  nombre
+    this.apellido = apellido
+    this.edad = edad
+}
+
+const cliente3 = new Cliente("Maria","Hernandez",30)
+console.log(cliente1)
+
+
+
+const ventasMensual = ["cliente1", "cliente2", cliente3]
+console.log(ventasMensual.length);
+
+ ventasMensual.push("cliente4")
+
+console.shift()
+console.log(ventasMensual)
+
+
+console.log(ventasMensual[0])
+console.log(ventasMensual[1])
+console.log(ventasMensual[2])
+
+console.log()
+
+
+let clienteTop = ventasMensual[1]
+
+ventasMensual[2] = "Nicolas"
+
+
+console.log(ventasMensual.includes("cliente1"))
+console.log(ventasMensual.includes("cliente6"))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
