@@ -28,7 +28,7 @@ let mascota = prompt("Ingrese el nombre de su mascota.")
 while(mascota === " " || mascota === null){
     console.log("El usuario no ha ingresado el nombre de su mascota");
     alert("Por favor ingrese el nombre de su mascota");
-    mascota = prompt("el nombre de su mascota");
+    mascota = prompt("Ingrese el nombre de su mascota");
 }
 
 function agregarEdad(){
@@ -39,9 +39,9 @@ function agregarEdad(){
         
         if(isNaN(edad)){
 
-            alert("Lo lamento, debes ingresar solo números.");
+            alert("Lo lamentamos, debes ingresar solo números.");
         }   else{
-                alert("Lo lamento, debes ser mayor de edad para registrarte como comprador.");
+                alert("Lo lamentamos, debes ser mayor de edad para registrarte como comprador.");
             }
 
         edad = parseInt(prompt("Ingrese su edad nuevamente"));
@@ -67,32 +67,14 @@ const cantidadInventario = [ 3, 0, 0, 0]; //array de cantidades de productos dis
 
 console.log( inventario);
 
-cantidadInventario.forEach(
-
-        function(proveedor){
-            console.log(proveedor + 10)
+cantidadInventario.forEach(    function(cantidad){
+            console.log(cantidad + 10);
         }
-    )
+);
     
 
-const vacio = cantidadInventario.find (  (X)=> x=0  )
-console.log(vacio)
-
-/*
-cantidadInventario.forEach(
-
-    const doble = traeProveedor.map( 
-        
-        function(sumar){
-            return sumar +10
-        }
-    )
-        
-)*/
-
-
-
-
+const vacio = cantidadInventario.find (  (cantidad) => cantidad===0  );
+console.log(vacio);
 
 
 
@@ -200,18 +182,18 @@ function aviso(){
 aviso()
 
 
-const Concurso = function (cliente,mascota,participante){
+const Concurso = function (cliente,mascota,pais){
         this.cliente=cliente
         this.mascota=mascota
-        this.participante=participante
+        this.pais=pais
 }
 
 
-let concurso1 = new Concurso ("Titi", "Pera", "uno")
-let concurso2 = new Concurso ("Samantha", "flor", "dos")
-let concurso3 = new Concurso ("Pedro", "Max", "tres")
-let concurso4 = new Concurso ("Manuel", "Tao", "cuatro")
-let concurso5 = new Concurso ("Liliana", "Cleo", "cinco")
+let concurso1 = new Concurso ("Titi", "Pera", "Cuba")
+let concurso2 = new Concurso ("Samantha", "flor", "Ecuador")
+let concurso3 = new Concurso ("Pedro", "Max", "Argentina")
+let concurso4 = new Concurso ("Manuel", "Tao", "Colombia")
+let concurso5 = new Concurso ("Liliana", "Cleo", "USA")
 
 
 let lista = [concurso1,concurso2,concurso3,concurso4,concurso5]
@@ -223,7 +205,7 @@ const agregarParticipante = document.getElementById("agregar")
 agregarParticipante.addEventListener("click", filtrarParticipante)
 
 function filtrarParticipante(){
-
+    
     const body = document.querySelector("body")
     const input = document.getElementById("filtrarP").value
     const palabraClave = input.trim().toUpperCase()
@@ -236,16 +218,16 @@ function filtrarParticipante(){
             const card = document.createElement("div")
 
             const cliente= document.createElement("h2")
-            nombre.textContent= concurso.cliente
+            cliente.textContent= concurso.cliente
             card.appendChild(cliente)
 
             const mascota = document.createElement("p")
-            mascota.textContent = `ascota: ${concurso.mascota}`
+            mascota.textContent = `Mascota: ${concurso.mascota}`
             card.appendChild(mascota)
 
-            const participante = document.createElement("p")
-            participante.textContent = `Participante: ${concurso.participante}`
-            card.appendChild(participante)
+            const pais = document.createElement("p")
+            pais.textContent = `Pais: ${concurso.pais}`
+            card.appendChild(pais)
 
 
             container.appendChild(card)
@@ -255,14 +237,14 @@ function filtrarParticipante(){
         body.appendChild(container)
 
     }else{
-        alert("No se encontrar resultados con tu busqueda.")
+        alert("No se encontraron resultados con tu busqueda.")
+        alert("Si deseas continuar con tu pardticipación da click en agregar e ingresa tu nombre nevamente")
     }
 
 }
 
 
-
-function agregarParticipante(){
+function agregarParticipantes(){
     const form = document.createElement("form")
     form.innerHTML= `
     
@@ -272,8 +254,8 @@ function agregarParticipante(){
     <label for="mascota-input">Mascota:</label>
     <input id="mascota-input" type="text" required>
 
-    <label for="participante-input">Numero de participacion:</label>
-    <input id="participante-input" type="text" required>
+    <label for="pais-input">Pais:</label>
+    <input id="pais-input" type="text" required>
 
     <button type="submit">Agregar</button>
     `
@@ -281,13 +263,13 @@ function agregarParticipante(){
     form.addEventListener("submit", function(event){
         event.preventDefault();
 
-
+     
 
         const clienteInput= document.getElementById("cliente-input").value.trim()
         const mascotaInput= document.getElementById("mascota-input").value.trim()
-        const participanteInput= document.getElementById("participante-input").value.trim()
+        const paisInput= document.getElementById("pais-input").value.trim()
 
-        if ( clienteInput==="" || mascotaInput === "" || participanteInput=== ""){
+        if ( clienteInput==="" || mascotaInput === "" || paisInput=== ""){
             alert("Datos incorrectos")
             return;
         }
@@ -297,13 +279,28 @@ function agregarParticipante(){
                     return;
         }
 
-        const concurso = new Concurso(clienteInput,mascotaInput,participanteInput)
+
+
+        const concurso = new Concurso(clienteInput,mascotaInput,paisInput)
         lista.push(concurso)
     })
 
     document.body.appendChild(form);
     
+}   
+
+
+
+let agregarP = document.getElementById("agregar");
+agregarP.addEventListener("submit", function validarFormulario(e){
+    e.preventDefault();
+    
+    prompt("Ingresa tu nombre")
+    confirm("Quieres proceder con el registro?")
+
+    console.log("Registro para el concurso cofirmado.")
 }
+)     
 
 
 
@@ -311,10 +308,3 @@ function agregarParticipante(){
 
 
 
-/* for(let i = 1; i <= 15; i++){
-    if(i == 7 || i == 12){
-        continue;
-    }
-
-    console.log("el numero es " + i )
-} */
