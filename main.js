@@ -1,310 +1,320 @@
-/* deg
-gaseg
-serga alt+shift+a = comentar lo que subraye */
+document.addEventListener("DOMContentLoaded", function() {
 
+alert("Bienvenido a FashionFor2");
+Swal.fire("Bienvenido a FashionFor2");
+alert("A continuación, ingresa tus datos para proceder con la compra");
 
-alert("Bienvenido a FashionFor2")
-alert("A continuación, ingresa tus datos para proceder con la compra")
+Swal.fire({
+    title: "The Internet?",
+    text: "That thing is still around?",
+    icon: "question"
+  });
 
+let nombre = "";
+let apellido = "";
+let edad = 0;
+let mascota = "";
+let pais = "";
 
-let nombre = prompt("Ingrese su nombre")
-while(nombre === "" || nombre === null){
-    console.log("El usuario no ha ingresado su nombre");
-    alert("Por favor ingrese su nombre");
-    nombre = prompt("Ingrese su nombre");
-}
+// Función para validar nombre, apellido, mascota y país
 
-let apellido = prompt("Ingrese su apellido")
-while(apellido === "" || apellido === null){
-    console.log("El usuario no ha ingresado su apellido");
-    alert("Por favor ingrese su apellido");
-    apellido = prompt("Ingrese su apellido");
-}
-
-alert("Hola "+ nombre + " " + apellido + ", queremos agradecer tu interes por adquirir los productos de nuestra tienda. Para poder continuar requerimos que ingreses tu edad")
-console.log("La persona " + nombre + " " + apellido + " se está registrando en tu tienda. Espera confirmación de edad para saber si se autoriza o no su compra.")
-
-let mascota = prompt("Ingrese el nombre de su mascota.")
-while(mascota === " " || mascota === null){
-    console.log("El usuario no ha ingresado el nombre de su mascota");
-    alert("Por favor ingrese el nombre de su mascota");
-    mascota = prompt("Ingrese el nombre de su mascota");
-}
-
-function agregarEdad(){
-
-    let edad = parseInt(prompt("Ingrese su edad"))
-
-    while(isNaN(edad) || edad<18 ){
-        
-        if(isNaN(edad)){
-
-            alert("Lo lamentamos, debes ingresar solo números.");
-        }   else{
-                alert("Lo lamentamos, debes ser mayor de edad para registrarte como comprador.");
-            }
-
-        edad = parseInt(prompt("Ingrese su edad nuevamente"));
-
+function validarTexto(texto, mensaje) {
+    let valor = prompt(mensaje);
+    while (valor === "" || !/^[a-zA-Z]+$/.test(valor)) {
+        console.log("El usuario no ha ingresado " + texto);
+        alert("Por favor ingresa un " + texto + " válido sin números o caracteres especiales.");
+        valor = prompt("Ingrese su " + texto + ":");
     }
-            
-            alert("Confirmamos tu registro de comprador con éxito.");
-            console.log("Adulto confirmado.");
-
+    return valor;
 }
 
-agregarEdad()
-
-
-
-alert("A continuación, te mostramos los productos disponibles con sus respectivos precios.")
-
-
-
-
-const inventario = ["accesirio", "camisa", "arnes", "platos"];  //array con productos 
-const cantidadInventario = [ 3, 0, 0, 0]; //array de cantidades de productos disponibles y agotados
-
-console.log( inventario);
-
-cantidadInventario.forEach(    function(cantidad){
-            console.log(cantidad + 10);
+// Función para validar la edad del cliente
+function validarEdad() {
+    let edad = parseInt(prompt("Ingrese su edad"));
+    while (isNaN(edad) || edad < 18) {
+        if (isNaN(edad)) {
+            alert("Lo lamentamos, debes ingresar solo números para la edad.");
+        } else {
+            alert("Lo lamentamos, debes ser mayor de edad para registrarte como comprador.");
         }
-);
+        edad = parseInt(prompt("Ingrese su edad nuevamente:"));
+    }
+    return edad;
+}
+
+
+
+    // Función para validar el formulario de registro
+    function validarRegistro(nombre, mascota, pais) {
+        if (!/^[a-zA-Z]+$/.test(nombre) || !/^[a-zA-Z]+$/.test(mascota) || !/^[a-zA-Z]+$/.test(pais)) {
+            alert("Por favor, ingresa nombres válidos sin números o caracteres especiales.");
+            return false;
+        }
+        return true;
+    }
+
+
     
 
-const vacio = cantidadInventario.find (  (cantidad) => cantidad===0  );
-console.log(vacio);
+nombre = validarTexto("nombre", "Ingrese su nombre");
+apellido = validarTexto("apellido", "Ingrese su apellido");
+edad = validarEdad();
+mascota = validarTexto("nombre de su mascota", "Ingrese el nombre de su mascota");
+pais = validarTexto("país", "Ingrese su país");
+
+alert("Hola " + nombre + " " + apellido + ", gracias por tu registro.");
 
 
+alert("A continuación, te mostramos los productos disponibles con sus respectivos precios.");
 
-function compraOnline(){
+const productos = [
+    { nombre: "Accesorio para perro talla S", precio: 15 },
+    { nombre: "Camisa para mascota", precio: 25 },
+    { nombre: "Arnés para perro", precio: 20 },
+    { nombre: "Plato para mascota", precio: 10 }
+];
 
-    const accesorio = 15
-    alert("Accesorio para perro talla S $ 15.00");
-    const envio = 5
-    alert("Costo del envío $ 5.00");
 
-    alert("Confirme si desea proceder con la compra.")
-    let confirmacion = prompt("Escribe SI si deseas continuar o NO si deseas anular la compra").toLocaleUpperCase().trim()
-
-    if(confirmacion === "NO" ){
-        alert(nombre + " " + apellido + " " + "esperamos que vuelvas pronto.");
-        return; // Salir de la función si el usuario decide cancelar la compra
+let carrito = [];
+productos.forEach((producto, index) => {
+    let opcion = prompt(`Deseas agregar ${producto.nombre} - $${producto.precio} al carrito? (SI/NO)`);
+    while (opcion.toUpperCase() !== "SI" && opcion.toUpperCase() !== "NO") {
+        alert("Por favor, ingresa SI o NO.");
+        opcion = prompt(`Deseas agregar ${producto.nombre} - $${producto.precio} al carrito? (SI/NO)`);
     }
-
-    console.log("El usuario confirmó que desea continuar con la compra.")
-    alert(nombre + " " + "gracias por tu confirmación.")
-
-    let totalCalculado = accesorio + envio
-    alert("El costo total de su pedido es" + " " + totalCalculado);
-
-    let dineroIngresado = parseInt(prompt("Ingresa un valor en número entero para continuar con su compra"))
-    if(isNaN(dineroIngresado)){
-        alert("Lo sentimos pero el valor ingresado es incorrecto. Requerimos que se ingrese un valor en número entero para poder continuar con la compra. Gracias.")
-        return; // Salir de la función si el usuario no ingresa un número
+    if (opcion.toUpperCase() === "SI") {
+        carrito.push(producto);
     }
+});
 
-    while (dineroIngresado < totalCalculado){
-        const dineroFaltante = totalCalculado - dineroIngresado;
-        alert("La cantidad ingresada es insuficiente para completar tu compra.");
-        dineroIngresado = parseInt(prompt("Vuelva a ingresar un valor en número entero para continuar con su pedido."))
-    }
+let inventario = [5, 5, 5, 5]; // Cantidad disponible de cada producto
 
-    const cambio = dineroIngresado - totalCalculado
-    alert("Su cambio es de" + " " + cambio + ". Agradecemos su compra y esperamos que vuelva pronto.")
+console.log("Inventario actual:");
+productos.forEach((producto, index) => {
+    console.log(`${producto.nombre} - Disponibles: ${inventario[index]}`);
+});
 
+let precioTotal = 0;
+carrito.forEach(producto => {
+    precioTotal += producto.precio;
+});
 
+const precioEnvio = 5;
+precioTotal += precioEnvio;
+
+alert(`Precio total de tu compra: $${precioTotal} (incluyendo $${precioEnvio} de envío)`);
+
+let dineroIngresado = parseInt(prompt("Ingresa la cantidad con la que vas a pagar:"));
+while (isNaN(dineroIngresado) || dineroIngresado < precioTotal) {
+    alert("Cantidad insuficiente. Por favor, ingresa un monto igual o mayor al total de la compra.");
+    dineroIngresado = parseInt(prompt("Vuelve a ingresar la cantidad con la que vas a pagar:"));
 }
 
-compraOnline()
-
-
-
-const fechaEntrega = new Date(2023,11,29,10,30,0,0)
-console.log(fechaEntrega);
-alert("La fecha de entrega será el " + fechaEntrega);
-
-
-
-
-
-function Cliente(nombre, apellido, edad){
-    this.nombre =  nombre;
-    this.apellido = apellido;
-    this.edad = edad;
+let vuelto = dineroIngresado - precioTotal;
+if (vuelto > 0) {
+    alert(`Gracias por tu compra. Tu vuelto es: $${vuelto}`);
+} else {
+    alert("Gracias por tu compra. Exacto cambio sería apreciado.");
 }
 
-const cliente3 = new Cliente(nombre, apellido, 30);
-console.log(cliente3);
+const fechaEntrega = new Date(2023, 11, 29, 10, 30, 0, 0);
+alert(`La fecha de entrega será el ${fechaEntrega}`);
 
-
-const ventasMensual = [cliente3];
-console.log(ventasMensual.length);
-
-ventasMensual.push(new Cliente ("Nicolas", "Garoni", 43));
-
-ventasMensual.shift(); // Eliminar el primer elemento del array
-
-
-console.log(ventasMensual);
-console.log(ventasMensual[0]);
-
-let clienteTop = ventasMensual[0];
-
-ventasMensual[0] = new Cliente("Max", "Figueroa", 70); //Modificar un cliente existente
-
-console.log(ventasMensual[0]);
-
-console.log(ventasMensual.includes(clienteTop)); // Verificar si el cliente original todavía está en la lista
-console.log(ventasMensual.includes(new Cliente("Nicolas", "Garoni", 43))); // Verificar si un cliente específico está en la lista
+alert( nombre + " tu y tu mascota " + mascota + " han sido seleccionados para un concurso.");
+alert("Para participar, por favor, vuelve a ingresar tus datos en la sección 'Agregar'.");
+console.log( nombre + " y su mascota " + mascota + " fueron seleccionados para el concurso.")
 
 
 
-
-
-function aviso(){
-
-    alert("Antes de tu partida queremos comunicarte que " + mascota + " y tu han sido seleccionados para el concurso de ropa")
-
-
-    alert("Confirmar si acepta los terminos y condiciones del concurso para continuar participando.")
-    let propuesta = prompt("Escribe SI si deseas continuar o NO si deseas cancelar tu participación en el concurso.").trim()
-
-    if(propuesta === "NO" ){
-        alert(nombre + " y " + mascota + " " + "esperamos verlos en un proximo concurso.");
-        return; // Salir de la función si el usuario decide cancelar su particion
-    }
-
+// Array de participantes en el concurso
+function Concurso(nombre, mascota, pais) {
+    this.nombre = nombre;
+    this.mascota = mascota;
+    this.pais = pais;
 }
 
+let concurso1 = new Concurso("Titi", "Pera", "Cuba");
+let concurso2 = new Concurso("Samantha", "Flor", "Ecuador");
+let concurso3 = new Concurso("Pedro", "Max", "Argentina");
+let concurso4 = new Concurso("Manuel", "Tao", "Colombia");
+let concurso5 = new Concurso("Liliana", "Cleo", "USA");
 
-aviso()
-
-
-const Concurso = function (cliente,mascota,pais){
-        this.cliente=cliente
-        this.mascota=mascota
-        this.pais=pais
-}
+let participantes = [concurso1, concurso2, concurso3, concurso4, concurso5];
 
 
-let concurso1 = new Concurso ("Titi", "Pera", "Cuba")
-let concurso2 = new Concurso ("Samantha", "flor", "Ecuador")
-let concurso3 = new Concurso ("Pedro", "Max", "Argentina")
-let concurso4 = new Concurso ("Manuel", "Tao", "Colombia")
-let concurso5 = new Concurso ("Liliana", "Cleo", "USA")
+// Ejemplo de cómo agregar los elementos del formulario al DOM
+const formulario = document.createElement("div");
+
+formulario.innerHTML = `
+    <label for="nombre-input">Nombre:</label>
+    <input id="nombre-input" type="text" required><br>
+
+    <label for="mascota-input">Mascota:</label>
+    <input id="mascota-input" type="text" required><br>
+
+    <label for="pais-input">País:</label>
+    <input id="pais-input" type="text" required><br>
+
+    
+`;
+
+document.body.appendChild(formulario);
 
 
-let lista = [concurso1,concurso2,concurso3,concurso4,concurso5]
+
+
+
+
+
+// Obtener referencia a los elementos del DOM
 
 const filtrarBtn = document.getElementById("filtrar");
-filtrarBtn.addEventListener("click", filtrarParticipante);
-
-const agregarParticipante = document.getElementById("agregar")
-agregarParticipante.addEventListener("click", filtrarParticipante)
-
-function filtrarParticipante(){
-    
-    const body = document.querySelector("body")
-    const input = document.getElementById("filtrarP").value
-    const palabraClave = input.trim().toUpperCase()
-    const resultado = lista.filter((concurso) => concurso.cliente.toUpperCase().includes(palabraClave))
-
-    if(resultado.length > 0){
-        const container = document.createElement("div")
-
-        resultado.forEach((concurso)=> {
-            const card = document.createElement("div")
-
-            const cliente= document.createElement("h2")
-            cliente.textContent= concurso.cliente
-            card.appendChild(cliente)
-
-            const mascota = document.createElement("p")
-            mascota.textContent = `Mascota: ${concurso.mascota}`
-            card.appendChild(mascota)
-
-            const pais = document.createElement("p")
-            pais.textContent = `Pais: ${concurso.pais}`
-            card.appendChild(pais)
+const agregarBtn = document.getElementById("agregar");
+//const participantesContainer = document.getElementById("participantes-container");
+const participantesContainer = document.createElement("div");
+participantesContainer.id = "participantes-container";
+document.body.appendChild(participantesContainer);
 
 
-            container.appendChild(card)
+ // Event listener para el botón de filtrar
+filtrarBtn.addEventListener("click", () => {
+    const filtroInput = document.getElementById("filtrar-input").value.trim().toUpperCase();
+    const resultados = participantes.filter(participante => participante.nombre.toUpperCase().includes(filtroInput));
 
-        })
-
-        body.appendChild(container)
-
-    }else{
-        alert("No se encontraron resultados con tu busqueda.")
-        alert("Si deseas continuar con tu pardticipación da click en agregar e ingresa tu nombre nevamente")
+    if (resultados.length > 0) {
+        participantes = resultados;
+        renderizarParticipantes();
+        alert("Participante encontrado.");
+    } else {
+        alert("No se encontraron participantes con ese nombre.");
     }
+});
 
+
+
+
+ // Event listener para el botón de agregar
+ agregarBtn.addEventListener("click", () => {
+    const nombreInput = document.getElementById("nombre-input").value.trim();
+    const mascotaInput = document.getElementById("mascota-input").value.trim();
+    const paisInput = document.getElementById("pais-input").value.trim();
+
+    if (validarRegistro(nombreInput, mascotaInput, paisInput)) {
+        const nuevoParticipante = new Concurso(nombreInput, mascotaInput, paisInput);
+        participantes.push(nuevoParticipante);
+        renderizarParticipantes();
+
+        // Limpiar los campos del formulario después de agregar un participante
+        document.getElementById("nombre-input").value = "";
+        document.getElementById("mascota-input").value = "";
+        document.getElementById("pais-input").value = "";
+
+        // Mostrar mensaje en consola
+        console.log(`El participante ${nombreInput} y su mascota ${mascotaInput} se han registrado para el concurso.`);
+    }
+});
+
+
+
+
+
+
+// Función para renderizar la lista de participantes en el DOM
+
+function renderizarParticipantes() {
+    participantesContainer.innerHTML = ""; // Limpiar el contenedor antes de renderizar nuevamente
+
+    participantes.forEach(participante => {
+        const participanteDiv = document.createElement("div");
+        participanteDiv.className = "participante-card";
+
+        const nombreP = document.createElement("p");
+        nombreP.textContent = `Nombre: ${participante.nombre}`;
+        participanteDiv.appendChild(nombreP);
+
+        const mascotaP = document.createElement("p");
+        mascotaP.textContent = `Mascota: ${participante.mascota}`;
+        participanteDiv.appendChild(mascotaP);
+
+        const paisP = document.createElement("p");
+        paisP.textContent = `País: ${participante.pais}`;
+        participanteDiv.appendChild(paisP);
+
+        participantesContainer.appendChild(participanteDiv);
+    });
 }
 
 
-function agregarParticipantes(){
-    const form = document.createElement("form")
-    form.innerHTML= `
-    
-    <label for="cliente-input">Nombre:</label>
-    <input id="cliente-input" type="text" required>
-        
-    <label for="mascota-input">Mascota:</label>
-    <input id="mascota-input" type="text" required>
 
-    <label for="pais-input">Pais:</label>
-    <input id="pais-input" type="text" required>
-
-    <button type="submit">Agregar</button>
-    `
-
-    form.addEventListener("submit", function(event){
-        event.preventDefault();
-
-     
-
-        const clienteInput= document.getElementById("cliente-input").value.trim()
-        const mascotaInput= document.getElementById("mascota-input").value.trim()
-        const paisInput= document.getElementById("pais-input").value.trim()
-
-        if ( clienteInput==="" || mascotaInput === "" || paisInput=== ""){
-            alert("Datos incorrectos")
-            return;
-        }
-
-        if(lista.some( (elemento) => elemento.cliente === clienteInput)){
-                    alert("El cliente ya existe en la lista")
-                    return;
-        }
+renderizarParticipantes();
 
 
 
-        const concurso = new Concurso(clienteInput,mascotaInput,paisInput)
-        lista.push(concurso)
+
+//GUARDAR DATOS DE INICIO DE SESION EN STORAGE
+
+const inputUsuario = document.querySelector("#inputUsuario");
+const inputClave = document.querySelector("#inputClave");
+const inicioSesion = document.getElementById("inicioSesion");
+
+
+function guardarDatos(){
+
+    localStorage.setItem("usuario", inputUsuario.value);
+    localStorage.setItem("clave", inputClave.value);
+}
+
+inicioSesion.addEventListener("click", () => {
+    guardarDatos();
+
+    const usuarioIngresado = inputUsuario.value.toLowerCase();
+    const usuarioFalso = "Usuario incorrecto";
+    const comprobacion = usuarioIngresado === "pepe" ? "Usuario existe" : usuarioFalso;
+
+
+    console.log(comprobacion);
+
+} )
+
+
+
+  // Ruta al archivo JSON local
+  const jsonFilePath = "comentarios.json";
+
+
+  fetch(jsonFilePath)
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error(`Error al cargar el archivo JSON: ${response.status}`);
+      }
+      return response.json(); 
     })
+    .then((data) => {
 
-    document.body.appendChild(form);
-    
-}   
-
-
-
-let agregarP = document.getElementById("agregar");
-agregarP.addEventListener("submit", function validarFormulario(e){
-    e.preventDefault();
-    
-    prompt("Ingresa tu nombre")
-    confirm("Quieres proceder con el registro?")
-
-    console.log("Registro para el concurso cofirmado.")
-}
-)     
+      mostrarComentarios(data.comentarios);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
 
+  function mostrarComentarios(comentarios) {
+   
+    console.log("Comentarios cargados:", comentarios);
+
+   
+    const comentariosContainer = document.getElementById("comentarios-container");
+
+    comentarios.forEach((comentario) => {
+      const comentarioDiv = document.createElement("div");
+      comentarioDiv.innerHTML = `
+        <p><strong>${comentario.producto}:</strong> ${comentario.opinion}</p>
+      `;
+      comentariosContainer.appendChild(comentarioDiv);
+    });
+  }
 
 
 
-
-
+});

@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 
 <body>
-
-    <h1> CONCURSO PARA TI Y TU MASCOTA </h1>
-        <p>En está sección podras confirmar tu participación y confirmar tu registro. En caso de no encontrarte selecciona la opción AGREGAR y vuelve a ingresar los datos.</p>
-
-        <input id="filtrarP" type="text" placeholder="que participante buscas?">
-        <button id="filtrar">FILTRAR</button>
-        <button  id="agregar">AGREGAR</button>
-
-
-
-    
-
+    <header>
         
+        <h1> CONCURSO PARA TI Y TU MASCOTA </h1>
+            <p>En está sección podras confirmar tu participación y confirmar tu registro. En caso de no encontrarte selecciona la opción AGREGAR y vuelve a ingresar los datos.</p>
+
+            <div id="concursantes">
+                <input id="filtrar-input" type="text" placeholder="que participante buscas?">
+                <button id="filtrar">FILTRAR</button>
+                <button  id="agregar">AGREGAR</button>
+            </div>
+
+    </header>
+
+    <main>
+        <div id="participantes-container"></div>
+
+    </main>      
+
+    <footer>
+
+        <h2> Ingresa a tu cuenta </h2>
+        
+            <input type="text" id="inputUsuario" placeholder="usuario" >
+            <input type="text" id="inputClave" placeholder="clave" >
+            <button id="inicioSesion"> Iniciar Sesión </button>
 
 
-    <script src="main.js"> </script>
+        <h2> Comentarios y Reseña </h2>
+
+        <div id="comentarios-container"></div>
+
+
+    </footer>
+
+
+    <script src="main.js" defer> </script>
 </body>
 
 </html>

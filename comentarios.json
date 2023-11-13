@@ -1,0 +1,24 @@
+{
+  "comentarios": [
+    {
+      "producto": "Accesorio para perro talla S",
+      "opinion": "¡Este accesorio es perfecto para perros pequeños! Mi mascota se ve tan elegante con él."
+    },
+    {
+      "producto": "Camisa para mascota",
+      "opinion": "La camisa es muy linda y cómoda. A mi perro le encanta usarla, y a mí me encanta cómo se ve."
+    },
+    {
+      "producto": "Arnés para perro",
+      "opinion": "¡Excelente arnés! Muy resistente y fácil de ajustar. Mi perro no tira más durante los paseos."
+    },
+    {
+      "producto": "Plato para mascota",
+      "opinion": "Me encanta este plato. Es resistente y fácil de limpiar. Además, a mi gato le gusta."
+    },
+    {
+      "producto": "Collar para gato",
+      "opinion": "El collar es muy bonito, pero se soltó después de un tiempo. Necesitaría una mejora en la calidad."
+    }
+  ]
+}
